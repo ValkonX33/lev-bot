@@ -95,4 +95,4 @@ client.on("messageCreate", (msg) => {
   //}
 });
 keepAlive();
-client.login("OTQ2MDQ4OTk3MzYwMDI1NjIw.YhZCyQ.3CPTT6f5NfoW1NclbPDbS-M6W0g");
+client.login("Your Token here or use an env file whatever ");
