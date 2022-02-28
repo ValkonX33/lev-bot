@@ -1,1 +1,1 @@
-Worker: node lev.js
+web:node lev.js
