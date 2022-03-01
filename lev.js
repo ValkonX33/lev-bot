@@ -1,5 +1,4 @@
 const { Client } = require("discord.js");
-const keepAlive = require("./server");
 const fetch = require("node-fetch");
 // const axios = require("axios");
 // const Database = require("@replit/database");
@@ -54,25 +53,38 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on("messageCreate", (msg) => {
+client.on("message", gotMessage);
+
+async function gotMessage(msg) {
   if (msg.author.bot) return;
 
   if (msg.content === "$inspire") {
     getQuote().then((quote) => msg.channel.send(quote));
   }
 
-  if (msg.content === "$inspire") {
-    getQuote().then((quote) => msg.channel.send(quote));
-  }
   if (sadWords.some((word) => msg.content.includes(word))) {
     const encouragement =
       encouragements[Math.floor(Math.random() * encouragements.length)];
     msg.reply(encouragement);
   }
   if (msg.content === "sex") {
-    msg.reply("dilado");
+    msg.reply("dila do");
     msg.react("🥲");
   }
+  if (msg.content === "$gif") {
+    let tokens = msg.content.split("");
+    let keywords = "cat";
+    if (tokens.length > 1) {
+      keywords = tokens.slice(1, tokens.length).join(" ");
+    }
+    let url = `https://g.tenor.com/v1/search?q=${keywords}&key=${process.env.TENORKEY}& contentfilter=off`;
+    let response = await fetch(url);
+    let json = await response.json();
+    let index = Math.floor(Math.random() * json.results.length);
+    msg.channel.send(json.results[index].url);
+    msg.channel.send("GIF From TENOR " + keywords);
+  }
+
 
   // if (msg.content.startsWith("$new")) {
   //   encouragingMessage = msg.content.split("$new ")[1];
@@ -94,5 +106,4 @@ client.on("messageCreate", (msg) => {
   //   msg.reply({ files: [file] });
   //}
 });
-keepAlive();
 client.login("Your Token here or use an env file whatever ");
