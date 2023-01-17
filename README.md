@@ -1,5 +1,5 @@
 # lev-bot
-Basic discord bot made for testing 
+ Discord bot made for testing 
 It do Encourage you everytime yo're sad or depressed 
 Also post random gifs by the help of Tenor API on $gif
 
